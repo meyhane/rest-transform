@@ -123,6 +123,8 @@ def receiver():
                 '''
                 transform_result = {}
                 try:
+                    logger.info("is_json:" + str(is_json))
+                    logger.info("payload:" + str(entity.get(payload_property_per_entity)))
                     if is_json:
                         resp = s.request(method_per_entity, rendered_url, json=entity.get(payload_property_per_entity),headers=headers_per_entity)
                     else:
@@ -156,6 +158,8 @@ def receiver():
 
     # get entities from request
     entities = request.get_json()
+    logger.info("request.is_json:" + str(request.is_json))
+
     response_data_generator = generate(entities, request.endpoint, request.is_json)
     response_data = []
     if do_stream and request.endpoint != 'sink':
